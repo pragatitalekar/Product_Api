@@ -40,12 +40,12 @@ public class ProductServiceTest {
 		prod1 = new Product();
         prod1.setId(1L);
         prod1.setName("Laptop");
-        prod1.setPrice(100.00);
+        prod1.setPrice(20000.00);
         
         prod2 = new Product();
         prod2.setId(2L);
         prod2.setName("Mobile");
-        prod2.setPrice(500.00);
+        prod2.setPrice(15000.00);
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class ProductServiceTest {
 
         assertThat(productList).isNotNull();
         assertThat(productList.size()).isEqualTo(2);
-        assertThat(productList.get(0).getName()).isEqualTo("laptop");
+        assertThat(productList.get(0).getName()).isEqualTo("Laptop");
         assertThat(productList.get(0).getPrice()).isEqualTo(20000.00, within(0.001));
     }
 
@@ -70,7 +70,7 @@ public class ProductServiceTest {
         var foundProd = productService.getProductById(2L);
 
         assertThat(foundProd).isPresent();
-        assertThat(foundProd.get().getName()).isEqualTo("mobile");
+        assertThat(foundProd.get().getName()).isEqualTo("Mobile");
         assertThat(foundProd.get().getPrice()).isEqualTo(15000.00, within(0.001));
     }
 
@@ -105,16 +105,16 @@ public class ProductServiceTest {
     @Test
     @DisplayName("TEST FILTER PRODUCTS BY NAME")
     public void filterByNameTest() {
-        when(productRepo.findByName("laptop"))
+        when(productRepo.findByName("Laptop"))
                 .thenReturn(List.of(prod1));
 
-        List<Product> filteredList = productService.filterByName("laptop");
+        List<Product> filteredList = productService.filterByName("Laptop");
 
         assertThat(filteredList).isNotNull();
         assertThat(filteredList).hasSize(1);
-        assertThat(filteredList.get(0).getName()).isEqualTo("laptop");
+        assertThat(filteredList.get(0).getName()).isEqualTo("Laptop");
         assertThat(filteredList.get(0).getPrice()).isEqualTo(20000.00, within(0.001));
 
-        verify(productRepo, times(1)).findByName("laptop");
+        verify(productRepo, times(1)).findByName("Laptop");
     }
 }
