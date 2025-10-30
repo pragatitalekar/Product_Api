@@ -61,7 +61,7 @@ public class ProductRepositoryTest {
 	@Test
     @DisplayName("TEST FILTER PRODUCTS BY PRICE (CUSTOM QUERY)")
     public void testFilterByPrice() {
-		List<Product> products = productRepository.filterByPrice(21.0);
+		List<Product> products = productRepository.filterByPrice(20.0);
 		
 		
 		// Simple approach with multiple get(0) method
