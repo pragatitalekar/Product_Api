@@ -11,11 +11,12 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepo extends JpaRepository<Product, Long> {
 	
 	// filter out and get the name from the products
-	List<Product> findByName(String name);
+	@Query("SELECT p FROM Product p WHERE LOWER(p.name) = LOWER(:name)")
+	List<Product> findByName(@Param("name") String name);
 
 	
 	// display all the products greater than the given price
-	@Query("SELECT p FROM Product p WHERE p.price < :price")
+	@Query("SELECT p FROM Product p WHERE p.price = :price")
 	List<Product> filterByPrice(@Param("price") Double price);
 	
 	
